@@ -11,6 +11,7 @@ public:
 	static COLORREF PenColor, BrushColor;
 	static HDC MemoryDC, DeviceDC;
 	static HBITMAP Buffer;
+	static RECT canvasRect;
 	HWND Canvas;
 	int Width;
 	virtual void Draw(int x, int y) = 0;

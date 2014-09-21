@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "OSISP_1.h"
 #include "UI.h"
+#include <Commdlg.h>
 
 #define MAX_LOADSTRING 100
 
@@ -133,7 +134,29 @@ bool isActivated = false;
 HDC Instrument::DeviceDC = 0;
 HDC Instrument::MemoryDC = 0;
 HBITMAP Instrument::Buffer = 0;
+RECT Instrument::canvasRect = { 0, 0, 0, 0 };
 Instrument * instrument = Pen::GetInstance();
+DWORD ColorChooseDialog(HWND hWnd)
+{
+	CHOOSECOLOR cc;                 // common dialog box structure 
+	static COLORREF acrCustClr[16]; // array of custom colors 
+	HPEN hbrush;                  // brush handle
+	static DWORD rgbCurrent;        // initial color selection
+
+	// Initialize CHOOSECOLOR 
+	ZeroMemory(&cc, sizeof(cc));
+	cc.lStructSize = sizeof(cc);
+	cc.hwndOwner = hWnd;
+	cc.lpCustColors = (LPDWORD)acrCustClr;
+	cc.rgbResult = rgbCurrent;
+	cc.Flags = CC_FULLOPEN | CC_RGBINIT;
+
+	if (ChooseColor(&cc) == TRUE)
+	{
+		return cc.rgbResult;
+	}
+	return 0;
+}
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	int wmId, wmEvent;
@@ -184,6 +207,20 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			break;
 		case UI_INSTRUMENTS_POLYGON:
 			instrument = Polygon::GetInstance();
+			break;
+		case UI_INSTRUMENTS_PENCOLOR:
+		{
+										HPEN newPen = CreatePen(NULL, 1, ColorChooseDialog(hWnd));
+										SelectObject(Instrument::DeviceDC, newPen);
+										SelectObject(Instrument::MemoryDC, newPen);
+		}
+			break;
+		case UI_INSTRUMENTS_BRUSHCOLOR:
+		{
+										  HBRUSH newBrush = CreateSolidBrush(ColorChooseDialog(hWnd));
+										  SelectObject(Instrument::DeviceDC, newBrush);
+										  SelectObject(Instrument::MemoryDC, newBrush);
+		}
 			break;
 		case UI_INSTRUMENTS_OVAL:
 			instrument = Oval::GetInstance();

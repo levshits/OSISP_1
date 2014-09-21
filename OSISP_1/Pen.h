@@ -16,7 +16,7 @@ public:
 		LineTo(MemoryDC, x, y);
 		previous_x = x;
 		previous_y = y;
-		BitBlt(DeviceDC, 0, 0, 700, 500, MemoryDC, 0, 0, SRCCOPY);
+		BitBlt(DeviceDC, canvasRect.left, canvasRect.top, canvasRect.right, canvasRect.bottom, MemoryDC, canvasRect.left, canvasRect.top, SRCCOPY);
 		//InvalidateRect(Canvas, NULL, false);
 	}
 	virtual void Display(int x, int y)
