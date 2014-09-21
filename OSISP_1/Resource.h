@@ -13,8 +13,8 @@
 #define IDI_OSISP_1			107
 #define IDI_SMALL				108
 #define IDC_OSISP_1			109
-#define IDM_PEN					110
-#define IDM_BRUSH				111
+#define IDM_OPEN					110
+#define IDM_SAVE				111
 #define IDC_MYICON				2
 
 //All screen widgets start from 2

@@ -8,7 +8,7 @@ protected:
 	~Instrument(){};
 public:
 	
-	static COLORREF PenColor, BrushColor;
+	static DWORD PenColor, BrushColor;
 	static HDC MemoryDC, DeviceDC;
 	static HBITMAP Buffer;
 	static RECT canvasRect;

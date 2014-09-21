@@ -135,12 +135,13 @@ HDC Instrument::DeviceDC = 0;
 HDC Instrument::MemoryDC = 0;
 HBITMAP Instrument::Buffer = 0;
 RECT Instrument::canvasRect = { 0, 0, 0, 0 };
+DWORD Instrument::BrushColor = 0;
+DWORD Instrument::PenColor = 0;
 Instrument * instrument = Pen::GetInstance();
 DWORD ColorChooseDialog(HWND hWnd)
 {
 	CHOOSECOLOR cc;                 // common dialog box structure 
-	static COLORREF acrCustClr[16]; // array of custom colors 
-	HPEN hbrush;                  // brush handle
+	static COLORREF acrCustClr[3]; // array of custom colors             
 	static DWORD rgbCurrent;        // initial color selection
 
 	// Initialize CHOOSECOLOR 
@@ -153,6 +154,7 @@ DWORD ColorChooseDialog(HWND hWnd)
 
 	if (ChooseColor(&cc) == TRUE)
 	{
+		rgbCurrent = cc.rgbResult;
 		return cc.rgbResult;
 	}
 	return 0;
@@ -209,15 +211,19 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			instrument = Polygon::GetInstance();
 			break;
 		case UI_INSTRUMENTS_PENCOLOR:
-		{
-										HPEN newPen = CreatePen(NULL, 1, ColorChooseDialog(hWnd));
+		{	
+										DWORD color = ColorChooseDialog(hWnd);
+										Instrument::PenColor = color;
+										HPEN newPen = CreatePen(NULL, 1, color);
 										SelectObject(Instrument::DeviceDC, newPen);
 										SelectObject(Instrument::MemoryDC, newPen);
 		}
 			break;
 		case UI_INSTRUMENTS_BRUSHCOLOR:
 		{
-										  HBRUSH newBrush = CreateSolidBrush(ColorChooseDialog(hWnd));
+										  DWORD color = ColorChooseDialog(hWnd);
+										  Instrument::BrushColor = color;
+										  HBRUSH newBrush = CreateSolidBrush(color);
 										  SelectObject(Instrument::DeviceDC, newBrush);
 										  SelectObject(Instrument::MemoryDC, newBrush);
 		}

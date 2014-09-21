@@ -45,7 +45,7 @@ UI::UI(HWND hWnd, HINSTANCE hInstance)
 		WS_VISIBLE | WS_CHILD, 10, margin, BUTTON_WIDTH, BUTTON_HEIGHT, hWnd, (HMENU)UI_SPINBOX_WIDTH, hInstance, NULL);
 	
 	GetClientRect(hWnd, &rect);
-	HWND Canvas = CreateWindowEx(WS_EX_ACCEPTFILES, L"STATIC", NULL, WS_CHILD | WS_VISIBLE | ES_AUTOHSCROLL, 130, 20, rect.right - 150, rect.bottom-20, hWnd, NULL, hInstance, NULL);
+	HWND Canvas = CreateWindowEx(WS_EX_ACCEPTFILES, L"STATIC", NULL, WS_CHILD | WS_VISIBLE , 130, 20, rect.right - 150, rect.bottom-20, hWnd, NULL, hInstance, NULL);
 	GetClientRect(Canvas, &rect);
 	Instrument::canvasRect = rect;
 	Instrument::DeviceDC = GetDC(Canvas);
