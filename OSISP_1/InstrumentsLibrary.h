@@ -1,0 +1,5 @@
+#include "Instrument.h"
+#include "Brush.h"
+#include "Pen.h"
+#include "Polygon.h"
+#include "Oval.h"
