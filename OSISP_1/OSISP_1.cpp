@@ -5,6 +5,7 @@
 #include "OSISP_1.h"
 #include "UI.h"
 #include <Commdlg.h>
+#include <CommCtrl.h>
 
 #define MAX_LOADSTRING 100
 
@@ -101,7 +102,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    HWND hWnd;
 
    hInst = hInstance; // Store instance handle in our global variable
-
+   
    hWnd = CreateWindowEx(WS_EX_ACCEPTFILES, szWindowClass, szTitle,
 	    WS_OVERLAPPEDWINDOW | WS_BORDER | WS_CAPTION,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, NULL, NULL, hInstance, NULL);

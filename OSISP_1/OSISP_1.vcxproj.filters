@@ -75,6 +75,9 @@
     <Image Include="OSISP_1.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="instruments.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

@@ -103,6 +103,7 @@
     <ResourceCompile Include="OSISP_1.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="instruments.bmp" />
     <Image Include="OSISP_1.ico" />
     <Image Include="small.ico" />
   </ItemGroup>
