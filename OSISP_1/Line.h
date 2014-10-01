@@ -1,15 +1,15 @@
 #pragma once
 #include "Instrument.h"
 
-	class Brush :
+	class Line :
 		public Instrument
 	{
 	private:
-		Brush(){};
+		Line(){};
 	public:
-		static Brush* GetInstance()
+		static Line* GetInstance()
 		{
-			static Brush _self;
+			static Line _self;
 			return &_self;
 		}
 		virtual void Draw(int x, int y)
@@ -22,7 +22,9 @@
 		}
 		virtual void Display(int x, int y)
 		{
-			Draw(x, y);
+			BitBlt(DeviceDC, canvasRect.left, canvasRect.top, canvasRect.right, canvasRect.bottom, MemoryDC, canvasRect.left, canvasRect.top, SRCCOPY);
+			MoveToEx(DeviceDC, previous_x, previous_y, NULL);
+			LineTo(DeviceDC, x, y);
 		}
 
 	};

@@ -170,7 +170,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	{
 	case WM_LBUTTONDOWN:
 	{							 
-	instrument->Initialize(LOWORD(lParam)-120, HIWORD(lParam));
+		instrument->Initialize(LOWORD(lParam) - 130, HIWORD(lParam)-30);
 		isActivated = true;							 
 	}
 		break;
@@ -178,13 +178,13 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	{
 					if (isActivated)
 					{
-						instrument->Display(LOWORD(lParam)-120, HIWORD(lParam));
+						instrument->Display(LOWORD(lParam)-130, HIWORD(lParam)-30);
 					}
 	}
 		break;
 	case WM_LBUTTONUP:
 		{
-			instrument->Draw(LOWORD(lParam) - 120, HIWORD(lParam));
+			instrument->Draw(LOWORD(lParam) - 130, HIWORD(lParam)-30);
 			isActivated = false;
 		}
 			break;
@@ -205,8 +205,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		case UI_INSTRUMENTS_PEN:
 			instrument = Pen::GetInstance();
 			break;
-		case UI_INSTRUMENTS_BRUSH:
-			instrument = Brush::GetInstance();
+		case UI_INSTRUMENTS_LINE:
+			instrument = Line::GetInstance();
 			break;
 		case UI_INSTRUMENTS_POLYGON:
 			instrument = Polygon::GetInstance();

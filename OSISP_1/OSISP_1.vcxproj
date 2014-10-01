@@ -79,7 +79,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Brush.h" />
+    <ClInclude Include="Line.h" />
     <ClInclude Include="Instrument.h" />
     <ClInclude Include="InstrumentsLibrary.h" />
     <ClInclude Include="OSISP_1.h" />
